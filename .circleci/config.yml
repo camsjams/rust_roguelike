@@ -1,0 +1,11 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: rust:1.29.0-slim
+    environment:
+      TZ: "/usr/share/zoneinfo/Etc/UTC"
+    steps:
+      - checkout
+      - run: cargo build
+      - run: cargo test

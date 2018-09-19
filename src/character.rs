@@ -99,6 +99,8 @@ impl Player for Character {
 
 #[cfg(test)]
 mod tests {
+    use super::*;
+
     #[test]
     fn test_new() {
         // arrange
