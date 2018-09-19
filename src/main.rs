@@ -100,7 +100,7 @@ fn play(player: &mut character::Character) {
         }
 
         if player.health > 0 {
-            enemy.level_up()();
+            enemy.level_up();
         }
     }
 
