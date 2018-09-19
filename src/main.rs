@@ -60,12 +60,15 @@ fn play(player: &mut character::Character) {
     );
     println!("Your unique stats: {}", player.stats());
     let mut enemy = computer::Computer::new(1, 16);
+    let mut round = 1;
 
     while player.health > 0 {
         println!(
-            "\n====\nYour health: {}\n(a)ttack or (d)odge\n",
+            "\n====\nRound {} | Your health: {}\n(a)ttack or (d)odge\n",
+            round,
             player.health
         );
+        round += 1;
 
         let _action = enemy.action();
         let _cpu_action = rand::thread_rng().gen_range(_action.0, _action.1);
@@ -105,7 +108,7 @@ fn play(player: &mut character::Character) {
     }
 
     println!(
-        "\n\n=== Game Over! ====\nYour soul has lost connection to this land.\n\n--Final Stats--Player:\n{}\nEnemy:\n{}",
+        "\n\n=== Game Over! ====\nYour soul has lost connection to this land.\n\n-- Final Stats --\n\nPlayer:\n{}\n\nEnemy:\n{}",
         player.stats(),
         enemy.stats()
     );
