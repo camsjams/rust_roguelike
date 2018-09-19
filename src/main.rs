@@ -2,6 +2,7 @@ extern crate rand;
 #[macro_use]
 extern crate text_io;
 
+mod character;
 use rand::Rng;
 use std::io;
 
@@ -12,7 +13,13 @@ fn main() {
         env!("CARGO_PKG_VERSION")
     );
 
-    const CLASSES: [&str; 5] = ["Cleric", "Warrior", "Hunter", "Wizard", "Thief"];
+    let characters: Vec<&character::Player> = [
+        character:Character::new("Cleric", 7, 5, 6, 7),
+        character:Character::new("Warrior", 10, 5, 5, 5),
+        character:Character::new("Hunter", 5, 7, 7, 6),
+        character:Character::new("Wizard", 3, 10, 5, 7),
+        character:Character::new("Thief", 4, 5, 6, 10),
+    ];
 
     let luck_amount = rand::thread_rng().gen_range(2, 11);
 
@@ -26,24 +33,19 @@ fn main() {
         .expect("Failed to read line");
     let character_name = input_text.trim();
 
-    print_classes(CLASSES);
-
-    let mut character_type: usize = 10;
-    while character_type == 10 {
-        character_type = read!();
-    }
-
-    play(character_name, luck_amount, CLASSES[character_type]);
-}
-
-fn play(name: &str, luck: i32, character_type: &str) {
-    println!("Welcome aboard {} the {}!", name, character_type);
-    println!("You have {} luck points.", luck);
-}
-
-fn print_classes(classes: [&str]) {
     println!("Please select your character type:");
-    for (i, elem) in classes.iter_mut().enumerate() {
-        print!("\n{}. {}\n\n", i + 1, elem);
+    for (i, elem) in characters.iter().enumerate() {
+        print!("\n{}. {}\n\n", i, elem.info());
     }
+
+    let mut character_index: usize = characters.len();
+    while character_index > characters.len() {
+        character_index = read!();
+    }
+
+    play(characters[character_index]);
+}
+
+fn play(player: character::Character) {
+    println!("Welcome aboard {} the {}!", player.name, player.class);
 }
