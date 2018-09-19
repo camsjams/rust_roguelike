@@ -96,3 +96,135 @@ impl Player for Character {
         )
     }
 }
+
+#[cfg(test)]
+mod tests {
+    #[test]
+    fn test_new() {
+        // arrange
+        const EXPECTED_NAME: &str = "Bob";
+        const EXPECTED_CLASS: &str = "Paladin";
+        const EXPECTED_HEALTH: i32 = 42;
+
+        // act
+        let player = Character::new(
+            EXPECTED_NAME.to_string(),
+            EXPECTED_CLASS.to_string(),
+            EXPECTED_HEALTH,
+            5,
+            6,
+            7,
+        );
+
+        // assert
+        assert_eq!(player.name, EXPECTED_NAME);
+        assert_eq!(player.class, EXPECTED_CLASS);
+        assert_eq!(player.health, EXPECTED_HEALTH);
+    }
+
+    #[test]
+    fn test_select() {
+        // arrange
+        const EXPECTED_NAME: &str = "Bill";
+        const EXPECTED_CLASS: &str = "Paladin";
+        const EXPECTED_HEALTH: i32 = 42;
+        let sample = Character::new(
+            "Bob".to_string(),
+            EXPECTED_CLASS.to_string(),
+            EXPECTED_HEALTH,
+            5,
+            6,
+            7,
+        );
+
+        // act
+        let player = sample.select(EXPECTED_NAME.to_string(), 10);
+
+        // assert
+        assert_eq!(player.name, EXPECTED_NAME);
+        assert_eq!(player.class, EXPECTED_CLASS);
+        assert_eq!(player.health, EXPECTED_HEALTH);
+    }
+
+    #[test]
+    fn test_damage() {
+        // arrange
+        const EXPECTED_HEALTH: i32 = 5;
+        const EXPECTED_STATS: &str = "Paladin - hp: 5 attack: 1 dodge: 1 luck: 1 experience: 2";
+        let mut player = Character::new("".to_string(), "Paladin".to_string(), 10, 1, 1, 1);
+
+        // act
+        player.damage(5);
+
+        // assert
+        assert_eq!(player.health, EXPECTED_HEALTH);
+        assert_eq!(player.stats(), EXPECTED_STATS);
+    }
+
+    #[test]
+    fn test_heal() {
+        // arrange
+        const EXPECTED_HEALTH: i32 = 15;
+        const EXPECTED_STATS: &str = "Paladin - hp: 15 attack: 1 dodge: 1 luck: 1 experience: 1";
+        let mut player = Character::new("".to_string(), "Paladin".to_string(), 10, 1, 1, 1);
+
+        // act
+        player.heal(5);
+
+        // assert
+        assert_eq!(player.health, EXPECTED_HEALTH);
+        assert_eq!(player.stats(), EXPECTED_STATS);
+    }
+
+    #[test]
+    fn test_attack() {
+        // arrange
+        const EXPECTED_ATTACK: i32 = 6;
+        let player = Character::new("".to_string(), "Rogue".to_string(), 1, 4, 1, 4);
+
+        // act
+        let result = player.attack();
+
+        // assert
+        assert_eq!(result, EXPECTED_ATTACK);
+    }
+
+    #[test]
+    fn test_dodge() {
+        // arrange
+        const EXPECTED_DODGE: i32 = 6;
+        let player = Character::new("".to_string(), "Rogue".to_string(), 1, 1, 4, 4);
+
+        // act
+        let result = player.dodge();
+
+        // assert
+        assert_eq!(result, EXPECTED_DODGE);
+    }
+
+    #[test]
+    fn test_info() {
+        // arrange
+        const EXPECTED_INFO: &str = "Rogue \thp: 5 attack: 4 dodge: 3 luck: 2";
+        let player = Character::new("".to_string(), "Rogue".to_string(), 5, 4, 3, 2);
+
+        // act
+        let result = player.info();
+
+        // assert
+        assert_eq!(result, EXPECTED_INFO);
+    }
+
+    #[test]
+    fn test_stats() {
+        // arrange
+        const EXPECTED_STATS: &str = "Paladin - hp: 2 attack: 3 dodge: 4 luck: 5 experience: 0";
+        let player = Character::new("".to_string(), "Paladin".to_string(), 2, 3, 4, 5);
+
+        // act
+        let result = player.stats();
+
+        // assert
+        assert_eq!(result, EXPECTED_STATS);
+    }
+}
