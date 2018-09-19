@@ -6,7 +6,7 @@ Rust Roguelike: Introductory Tutorial Example of Rust and Unit Testing
 [View tutorial here](https://etalx.com)
 
 ## Build
->      $ cargo run
+>      $ cargo build
 
 ## Run
 >      $ cargo run
