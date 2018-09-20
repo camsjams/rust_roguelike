@@ -15,7 +15,7 @@ Master:
 * [Docker](https://www.docker.com/)
 
 
-[View tutorial here](https://etalx.com)
+[View tutorial here](https://www.codementor.io/cameronmanavian/rust-rpg-introductory-tutorial-of-rust-and-unit-testing-with-a-roguelike-njqhpy50p)
 
 ## Build
 >      $ cargo build
