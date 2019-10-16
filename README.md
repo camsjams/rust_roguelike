@@ -1,7 +1,7 @@
 # rust_roguelike
 Rust Roguelike: Introductory Tutorial Example of Rust and Unit Testing
 
-[View tutorial here](https://www.codementor.io/cameronmanavian/rust-rpg-introductory-tutorial-of-rust-and-unit-testing-with-a-roguelike-njqhpy50p)
+[View tutorial here](https://medium.com/@cameron.manavian/rust-rpg-introductory-tutorial-of-rust-unit-testing-and-continuous-integration-with-a-roguelike-b7b86e90855c)
 
 ![Image of Fantasy style forest](img/the-path.jpg)
 
